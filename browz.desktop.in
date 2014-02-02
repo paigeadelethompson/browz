@@ -1,0 +1,8 @@
+[Desktop Entry]
+_Name=Browz
+_Comment=Browz application
+Categories=GNOME;Utility;
+Exec=browz
+Icon=browz
+Terminal=false
+Type=Application
