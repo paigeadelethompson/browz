@@ -65,7 +65,6 @@ class BrowzWindow(Window):
         self.webViewNew.show()
         self.page=self.noteBook.get_current_page()
         print self.page
-        self.noteBook.set_tab_reorderable(self.page,True)
     def on_urlEntry_activate(self, widget):
         url=widget.get_text()
         Http=self.checkHTTPPrefix(url)
