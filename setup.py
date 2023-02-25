@@ -2,7 +2,10 @@ from setuptools import setup
 
 setup(
     name='browz',
-    version='1.0.0',
+    version='1.0.1',
+    description='Python/GTK Web Browser',
+    author='Millan Philipose',
+    license='MIT',
     install_requires=[
         'autopep8==2.0.1',
         'distutils-extra-python==2.39.2',
