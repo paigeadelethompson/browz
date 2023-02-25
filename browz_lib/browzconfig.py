@@ -1,7 +1,7 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
-### BEGIN LICENSE
+# BEGIN LICENSE
 # This file is in the public domain
-### END LICENSE
+# END LICENSE
 
 # THIS IS Browz CONFIGURATION FILE
 # YOU CAN PUT THERE SOME GLOBAL VALUE
@@ -12,7 +12,7 @@ __all__ = [
     'project_path_not_found',
     'get_data_file',
     'get_data_path',
-    ]
+]
 
 # Where your project will look for your data (for instance, images and ui
 # files). By default, this is ../data, relative your trunk layout
@@ -23,8 +23,8 @@ __version__ = 'VERSION'
 import os
 
 import gettext
-from gettext import gettext as _
 gettext.textdomain('browz')
+
 
 class project_path_not_found(Exception):
     """Raised when we can't find the project directory."""

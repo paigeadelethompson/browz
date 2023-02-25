@@ -1,19 +1,17 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
-### BEGIN LICENSE
+# BEGIN LICENSE
 # This file is in the public domain
-### END LICENSE
+# END LICENSE
 
+from browz_lib import set_up_logging, get_version
+from browz import BrowzWindow
+from gi.repository import Gtk  # pylint: disable=E0611
 import optparse
 
 import gettext
 from gettext import gettext as _
 gettext.textdomain('browz')
 
-from gi.repository import Gtk # pylint: disable=E0611
-
-from browz import BrowzWindow
-
-from browz_lib import set_up_logging, get_version
 
 def parse_options():
     """Support for command line options"""
@@ -25,11 +23,12 @@ def parse_options():
 
     set_up_logging(options)
 
+
 def main():
     'constructor for your class instances'
     parse_options()
 
-    # Run the application.    
+    # Run the application.
     window = BrowzWindow.BrowzWindow()
     window.show()
     Gtk.main()

@@ -1,24 +1,24 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
-### BEGIN LICENSE
+# BEGIN LICENSE
 # This file is in the public domain
-### END LICENSE
+# END LICENSE
 
 """this dialog adjusts values in gsettings
 """
 
-from gi.repository import Gtk # pylint: disable=E0611
+from . helpers import get_builder, show_uri, get_help_uri
+from gi.repository import Gtk  # pylint: disable=E0611
 import logging
 logger = logging.getLogger('browz_lib')
 
-from . helpers import get_builder, show_uri, get_help_uri
 
 class PreferencesDialog(Gtk.Dialog):
     __gtype_name__ = "PreferencesDialog"
 
     def __new__(cls):
-        """Special static method that's automatically called by Python when 
+        """Special static method that's automatically called by Python when
         constructing a new instance of this class.
-        
+
         Returns a fully instantiated PreferencesDialog object.
         """
         builder = get_builder('PreferencesBrowzDialog')
@@ -33,7 +33,7 @@ class PreferencesDialog(Gtk.Dialog):
         and creating a PreferencesDialog object with it in order to
         finish initializing the start of the new PerferencesBrowzDialog
         instance.
-        
+
         Put your initialization code in here and leave __init__ undefined.
         """
 
@@ -48,4 +48,3 @@ class PreferencesDialog(Gtk.Dialog):
 
     def on_btn_help_clicked(self, widget, data=None):
         show_uri(self, "ghelp:%s" % get_help_uri('preferences'))
-

@@ -1,20 +1,21 @@
 # -*- Mode: Python; coding: utf-8; indent-tabs-mode: nil; tab-width: 4 -*-
-### BEGIN LICENSE
+# BEGIN LICENSE
 # This file is in the public domain
-### END LICENSE
+# END LICENSE
 
-from gi.repository import Gio, Gtk # pylint: disable=E0611
+from . helpers import get_builder, show_uri, get_help_uri
+from gi.repository import Gio, Gtk  # pylint: disable=E0611
 import logging
 logger = logging.getLogger('browz_lib')
 
-from . helpers import get_builder, show_uri, get_help_uri
 
 # This class is meant to be subclassed by BrowzWindow.  It provides
 # common functions and some boilerplate.
+
 class Window(Gtk.Window):
     __gtype_name__ = "Window"
 
-    # To construct a new instance of this method, the following notable 
+    # To construct a new instance of this method, the following notable
     # methods are called in this order:
     # __new__(cls)
     # __init__(self)
@@ -23,11 +24,11 @@ class Window(Gtk.Window):
     #
     # For this reason, it's recommended you leave __init__ empty and put
     # your initialization code in finish_initializing
-    
+
     def __new__(cls):
-        """Special static method that's automatically called by Python when 
+        """Special static method that's automatically called by Python when
         constructing a new instance of this class.
-        
+
         Returns a fully instantiated BaseBrowzWindow object.
         """
         builder = get_builder('BrowzWindow')
@@ -45,9 +46,9 @@ class Window(Gtk.Window):
         # Get a reference to the builder and set up the signals.
         self.builder = builder
         self.ui = builder.get_ui(self, True)
-        self.PreferencesDialog = None # class
-        self.preferences_dialog = None # instance
-        self.AboutDialog = None # class
+        self.PreferencesDialog = None  # class
+        self.preferences_dialog = None  # instance
+        self.AboutDialog = None  # class
 
         self.settings = Gio.Settings("net.launchpad.browz")
         self.settings.connect('changed', self.on_preferences_changed)
@@ -57,7 +58,7 @@ class Window(Gtk.Window):
         # See https://wiki.ubuntu.com/UbuntuDevelopment/Internationalisation/Coding
         # for more information about Launchpad integration.
         try:
-            from gi.repository import LaunchpadIntegration # pylint: disable=E0611
+            from gi.repository import LaunchpadIntegration  # pylint: disable=E0611
             LaunchpadIntegration.add_items(self.ui.helpMenu, 1, True, True)
             LaunchpadIntegration.set_sourcepackagename('browz')
         except ImportError:
@@ -82,8 +83,8 @@ class Window(Gtk.Window):
     def on_mnu_about_activate(self, widget, data=None):
         """Display the about box for browz."""
         if self.AboutDialog is not None:
-            about = self.AboutDialog() # pylint: disable=E1102
-            response = about.run()
+            about = self.AboutDialog()  # pylint: disable=E1102
+            about.run()
             about.destroy()
 
     def on_mnu_preferences_activate(self, widget, data=None):
@@ -99,7 +100,7 @@ class Window(Gtk.Window):
             self.preferences_dialog.present()
         elif self.PreferencesDialog is not None:
             logger.debug('create new preferences_dialog')
-            self.preferences_dialog = self.PreferencesDialog() # pylint: disable=E1102
+            self.preferences_dialog = self.PreferencesDialog()  # pylint: disable=E1102
             self.preferences_dialog.connect('destroy', self.on_preferences_dialog_destroyed)
             self.preferences_dialog.show()
         # destroy command moved into dialog to allow for a help button
@@ -118,10 +119,9 @@ class Window(Gtk.Window):
 
     def on_preferences_dialog_destroyed(self, widget, data=None):
         '''only affects gui
-        
+
         logically there is no difference between the user closing,
         minimising or ignoring the preferences dialog'''
         logger.debug('on_preferences_dialog_destroyed')
         # to determine whether to create or present preferences_dialog
         self.preferences_dialog = None
-
